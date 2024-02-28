@@ -3,7 +3,7 @@
 
 local mp = require 'mp'
 
-mp.observe_property('pause', 'bool', function(_, paused)
+function on_pause_change(_, paused)
     if paused then
         local remaining_seconds = mp.get_property('time-remaining')
 
@@ -15,4 +15,5 @@ mp.observe_property('pause', 'bool', function(_, paused)
         mp.osd_message(msg)
     end
 end
-)
+
+mp.observe_property('pause', 'bool', on_pause_change)
