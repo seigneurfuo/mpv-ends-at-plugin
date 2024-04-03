@@ -3,6 +3,7 @@
 
 local mp = require 'mp'
 local osd_duration = 2
+local already_paused = false
 
 function on_load()
     -- https://github.com/mpv-player/mpv/issues/6079#issuecomment-414138926
@@ -13,7 +14,12 @@ end
 
 function on_pause_change(_, paused)
     if paused then
+        already_paused = paused
         show_message()
+
+    elseif already_paused then
+        show_message()
+        already_paused = false
     end
 end
 
